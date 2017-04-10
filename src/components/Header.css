@@ -1,0 +1,17 @@
+$header-background-color: #103D5D;
+$header-color: #fff;
+
+.main-header {
+  color: $header-color;
+  background-color: $header-background-color;
+  padding: 33px 0 25px 15px;
+}
+
+.main-header__title {
+  font-size: 25px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  display: inline-block;
+  margin: 0;
+  vertical-align: middle;
+}
