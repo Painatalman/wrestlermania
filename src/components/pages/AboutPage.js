@@ -6,12 +6,14 @@ export default class AboutPage extends Component {
   render() {
     return (
       <Layout>
-        <h1>
-          About
-        </h1>
-        <p>
-          Just a small project
-        </p>
+        <div>
+          <h1>
+            About
+          </h1>
+          <p>
+            Just a small project
+          </p>
+        </div>
       </Layout>
     )
   }

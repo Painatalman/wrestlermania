@@ -3,10 +3,15 @@ import {
   DELETE_WRESTLER,
   UPDATE_WRESTLER,
   FETCH_WRESTLERS,
-  TOGGLE_EDITING_WRESTLER
+  TOGGLE_EDITING_WRESTLER,
+  AUTH_USER,
+  UNAUTH_USER,
+  AUTH_ERROR
 } from './types.js';
 
 import firebase from '../firebase.js';
+
+import { browserHistory } from 'react-router';
 
 const wrestlersRef = firebase.database().ref('wrestlers');
 
@@ -121,5 +126,61 @@ export function toggleEditingWrestler(wrestlerId) {
     payload: {
       data: wrestlerId
     }
+  }
+}
+
+export function authenticate(user) {
+  return {
+    type: AUTH_USER,
+    payload: user
+  }
+}
+
+export function unauthenticate() {
+  return {
+    type: UNAUTH_USER
+  }
+}
+
+export function authError(error) {
+  return {
+    type: AUTH_ERROR,
+    payload: error
+  }
+}
+
+export function login({ email, password }) {
+  return function (dispatch) {
+    // we can do any asynchronous request or whatever
+    // it allows us to dispatch any type of action
+    // check if the request is good or bad, for example
+    // we are not limited to ONE dispatch, with Redux-thunk
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(user => {
+        // if request is good
+        // - update the state of authentication
+        dispatch(authenticate(user));
+        // - save the JWT token
+        // localStorage.setItem('token', response.data.token);
+        // - where? On localstorage
+        // - redirect to HOME
+        browserHistory.push('/');
+      })
+      .catch(() => {
+        dispatch(authError('Bad Login Info'));
+      });
+  }
+}
+
+export function logout() {
+  return function (dispatch) {
+    firebase.auth().signOut()
+      .then(() => {
+        dispatch(unauthenticate());
+        browserHistory.push('/');
+      })
+      .catch(() => {
+        dispatch(authError('Bad Logout Info'));
+      });
   }
 }
