@@ -3,7 +3,8 @@ import {
   SAVE_WRESTLER,
   DELETE_WRESTLER,
   UPDATE_WRESTLER,
-  TOGGLE_EDITING_WRESTLER
+  TOGGLE_EDITING_WRESTLER,
+  SET_WRANDOM_WRESTLER
 } from '../actions/types.js';
 
 /**
@@ -96,6 +97,31 @@ export default function(state = {
             editingWrestler: getWrestlerData(state.wrestlers, wrestlerId)
           };
         }
+      case SET_WRANDOM_WRESTLER:
+        const currentWrestlerId = state.wrandomWrestler ?
+          state.wrandomWrestler.id
+          : null;
+        const wrestlerLength = state.wrestlers.length;
+        let wrandomWrestler;
+
+        if (wrestlerLength > 1) {
+          do {
+            wrandomWrestler = getWrestlerData(
+              state.wrestlers,
+              state.wrestlers[
+                Math.floor(Math.random() * wrestlerLength)
+              ].id
+            );
+          } while (wrandomWrestler.id === currentWrestlerId);
+        } else {
+          wrandomWrestler = getWrestlerData(state.wrestlers, currentWrestlerId);
+        }
+
+        return {
+          ...state,
+          wrandomWrestler
+        }
+
       default:
         return state;
     }

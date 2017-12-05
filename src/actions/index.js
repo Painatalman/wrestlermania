@@ -6,12 +6,13 @@ import {
   TOGGLE_EDITING_WRESTLER,
   AUTH_USER,
   UNAUTH_USER,
-  AUTH_ERROR
+  AUTH_ERROR,
+  SET_WRANDOM_WRESTLER
 } from './types.js';
 
 import firebase from '../firebase.js';
-
 import { browserHistory } from 'react-router';
+
 
 const wrestlersRef = firebase.database().ref('wrestlers');
 
@@ -183,4 +184,29 @@ export function logout() {
         dispatch(authError('Bad Logout Info'));
       });
   }
+}
+
+/**
+ * Dispatches an action that changes the currently random wrestler
+ * to one that is different from the currently active one
+ * @param {*} currentWrestlerId the current wrestler id. If set to null, the there is no defned wrestler
+ * @returns {*} an action to be dispatched
+ */
+export function setWrandomWrestler(currentWrestlerId) {
+  return {
+    type: SET_WRANDOM_WRESTLER,
+    payload: {
+      data: currentWrestlerId
+    }
+  }
+}
+
+export function fetchWrestlersAndSetWrandomWrestler() {
+  // Again, Redux Thunk will inject dispatch here.
+  // It also injects a second argument called getState() that lets us read the current state.
+  // Remember I told you dispatch() can now handle thunks?
+  return (dispatch) =>
+    dispatch(fetchWrestlers()).then(() => {
+      dispatch(setWrandomWrestler());
+    });
 }
