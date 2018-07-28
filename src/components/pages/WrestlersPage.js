@@ -29,21 +29,23 @@ class WrestlersPage extends Component {
   render() {
     return (
       <Layout>
-          <WrestlerForm/>
-          <ul className={styles['wrestler-page__cards']}>
-            {this.props.wrestlers.map((wrestler) => {
-              return (
-                <WrestlerCard
-                  key={wrestler.id}
-                  id={wrestler.id}
-                  title={wrestler.title}
-                  description={wrestler.description}
-                  // removeItem={this.removeItem.bind(this)}
-                  // toggleEditingMode={this.toggleEditingMode.bind(this)}
-                />
-              )
-            })}
-          </ul>
+          <div>
+            <WrestlerForm/>
+            <ul className={styles['wrestler-page__cards']}>
+              {this.props.wrestlers.map((wrestler) => {
+                return (
+                  <WrestlerCard
+                    key={wrestler.id}
+                    id={wrestler.id}
+                    title={wrestler.title}
+                    description={wrestler.description}
+                    // removeItem={this.removeItem.bind(this)}
+                    // toggleEditingMode={this.toggleEditingMode.bind(this)}
+                  />
+                )
+              })}
+            </ul>
+          </div>
       </Layout>
     );
   }
