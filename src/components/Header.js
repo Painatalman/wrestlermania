@@ -28,7 +28,7 @@ class Header extends Component {
     return (
       <header className={styles['main-header']}>
           <div className={styles['main-header__wrapper']}>
-            <h1 className={styles['main-header__title']}>Wrestlermania</h1>
+            <h1 className={styles['main-header__title']}>Wrandom Wrestler</h1>
           </div>
           <div>
           <Link to='/'>Wrandom Wrestler</Link>
