@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter , Route } from 'react-router-dom';
+import { Router , Route } from 'react-router-dom';
 
 import requireAuth from './requireAuth';
 
@@ -9,10 +9,12 @@ import AboutPage from './pages/AboutPage';
 import LoginPage from './pages/LoginPage';
 import LogoutPage from './pages/LogoutPage';
 
+import history from '../history.js';
+
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
+      <Router history={history}>
         <div>
           <Route exact path="/" component={WrandomWrestlerPage}/>
           <Route path="/generate" component={requireAuth(WrestlersPage)}/>
@@ -20,7 +22,7 @@ class App extends Component {
           <Route path="/logout" component={LogoutPage}/>
           <Route path="/about" component={AboutPage} />
         </div>
-      </BrowserRouter>
+      </Router>
     )
   }
 }
