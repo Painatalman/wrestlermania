@@ -97,7 +97,7 @@ export function deleteWrestler(removedObjectId) {
 }
 
 export function fetchWrestlers() {
-  return (dispatch) => {
+  return (dispatch) => new Promise(resolve => {
     wrestlersRef.once('value', (snapshot) => {
       let items = snapshot.val();
       let newState = [];
@@ -117,8 +117,10 @@ export function fetchWrestlers() {
         payload: newState
       });
 
+      resolve();
+
     });
-  }
+  });
 }
 
 export function toggleEditingWrestler(wrestlerId) {
@@ -167,8 +169,8 @@ export function login({ email, password }) {
         // - redirect to HOME
         history.push('/');
       })
-      .catch(() => {
-        dispatch(authError('Bad Login Info'));
+      .catch(e => {
+        dispatch(authError(`Bad Login Info: ${e}`));
       });
   }
 }
