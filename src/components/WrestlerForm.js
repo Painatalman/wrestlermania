@@ -72,6 +72,10 @@ class WrestlerForm extends Component {
     this.setState(stateChangeObject);
   }
 
+  handleResetButtonClick() {
+    this.props.toggleEditingWrestler(null);
+  }
+
   constructor(props) {
     super(props);
 
@@ -131,6 +135,13 @@ class WrestlerForm extends Component {
             <button className={styles['wrestler-form__button']}>
               {this.props.editingWrestler ? 'Edit' : 'Add'}
             </button>
+          {
+            this.props.editingWrestler ? 
+              <button className={styles['wrestler-form__button']} onClick={this.handleResetButtonClick.bind(this)}>
+                Reset
+              </button>
+              : ''
+          }
           </form>
       </section>
     );
@@ -141,6 +152,7 @@ WrestlerForm.propTypes = {
   // used for existing wrestlers
   saveWrestler: PropTypes.func.isRequired,
   updateWrestler: PropTypes.func.isRequired,
+  toggleEditingWrestler: PropTypes.func.isRequired,
   editingWrestler: PropTypes.object
 }
 
@@ -151,5 +163,6 @@ export default connect(function mapStateToProps(state) {
   };
 }, {
   saveWrestler: actions.saveWrestler,
-  updateWrestler: actions.updateWrestler
+  updateWrestler: actions.updateWrestler,
+  toggleEditingWrestler: actions.toggleEditingWrestler
 })(WrestlerForm);

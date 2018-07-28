@@ -39,7 +39,8 @@ export default function(state = {
 
           return {
             ...state,
-            wrestlers: [...state.wrestlers, wrestlerObject]
+            wrestlers: [...state.wrestlers, wrestlerObject],
+            editingWrestler: null
           }
         } else {
           return {
@@ -86,7 +87,7 @@ export default function(state = {
       case TOGGLE_EDITING_WRESTLER:
         const wrestlerId = action.payload.data;
 
-        if (state.editingWrestler && state.editingWrestler.id === wrestlerId) {
+        if (!wrestlerId) {
           return {
             ...state,
             editingWrestler: null
