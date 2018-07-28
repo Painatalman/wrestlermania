@@ -38,3 +38,6 @@ jspm_packages
 
 # Mac-related
 .DS_Store
+
+# sourcemaps and IDE-related
+*.map
