@@ -11,7 +11,7 @@ import {
 } from './types.js';
 
 import firebase from '../firebase.js';
-import { browserHistory } from 'react-router';
+import history from '../history.js';
 
 
 const wrestlersRef = firebase.database().ref('wrestlers');
@@ -165,7 +165,7 @@ export function login({ email, password }) {
         // localStorage.setItem('token', response.data.token);
         // - where? On localstorage
         // - redirect to HOME
-        browserHistory.push('/');
+        history.push('/');
       })
       .catch(() => {
         dispatch(authError('Bad Login Info'));
@@ -178,7 +178,7 @@ export function logout() {
     firebase.auth().signOut()
       .then(() => {
         dispatch(unauthenticate());
-        browserHistory.push('/');
+        history.push('/');
       })
       .catch(() => {
         dispatch(authError('Bad Logout Info'));
