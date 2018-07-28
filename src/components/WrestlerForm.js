@@ -79,9 +79,9 @@ class WrestlerForm extends Component {
       this.state = {
         title: props.editingWrestler.title,
         description: props.editingWrestler.description,
-        moves: props.editingWrestler.moves,
-        finishers: props.editingWrestler.finishers,
-        facts: props.editingWrestler.facts
+        moves: props.editingWrestler.moves || [],
+        finishers: props.editingWrestler.finishers || [],
+        facts: props.editingWrestler.facts || []
       };
     } else {
       this.state = this.getInitialFormStateObject();
@@ -93,8 +93,7 @@ class WrestlerForm extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // in here, the form will be filled
-    // if the editingWrestler changes
+    // fill form if editingWrestler changes
     if (nextProps.editingWrestler &&
       (!this.props.editingWrestler || this.props.editingWrestler.id !== nextProps.editingWrestler.id)
     ) {
@@ -105,9 +104,9 @@ class WrestlerForm extends Component {
       this.setState({
         title: editingWrestler.title,
         description: editingWrestler.description,
-        moves: editingWrestler.moves,
-        finishers: editingWrestler.finishers,
-        facts: editingWrestler.facts
+        moves: editingWrestler.moves || [],
+        finishers: editingWrestler.finishers || [],
+        facts: editingWrestler.facts || []
       });
     } else if (!nextProps.editingWrestler && this.props.editingWrestler) {
       // we changed from editing to adding a wrestler

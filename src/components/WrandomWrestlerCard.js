@@ -18,7 +18,7 @@ function WrandomWrestlerCard(props) {
       </h2>
       <ul className={styles['wrandom-wrestler-card__facts']}>
         {
-          facts.map((item, iter) =>
+          facts && facts.map((item, iter) =>
             <li key={iter} className={styles['wrandom-wrestler-card__list-item']}>{item}</li>
           )
         }
