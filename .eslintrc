@@ -1,9 +1,10 @@
 {
   "env": {
-    "browser": 1
+    "browser": true,
+    "es6": true
   },
   "globals": {
-    "$": 1
+    "$": false
   },
   "plugins": [
     "react"
